@@ -1,10 +1,16 @@
 import { useState } from "react";
 import List from "./List";
 import { loadPokemon, loadSpecies } from "../services/api";
+import Detail from "./Detail";
 
 function Main() {
   const [pokemon, setPokemon] = useState("");
   const [species, setSpecies] = useState("");
+
+  function backButton() {
+    setPokemon("");
+    console.log(pokemon);
+  }
 
   async function handlePokemon(poke) {
     await loadPokemon(poke, setPokemon);
@@ -12,26 +18,21 @@ function Main() {
 
   if (pokemon && !species) {
     loadSpecies(pokemon.id, setSpecies);
-    console.log(species)
+    console.log(pokemon);
   }
 
-  if (!pokemon) {
-    return (
-      <div className="Main">
-        <List callback={handlePokemon} />
-      </div>
-    );
-  }
-  if (pokemon) {
-    console.log(species)
-    return (
-      <div className="Main">
-        {pokemon.name}
-        {pokemon.id}
-        {species.base_happiness}
-      </div>
-    );
-  }
+  console.log(species);
+  return (
+    <div className="Main">
+      <List callback={handlePokemon} pokemon={pokemon} />
+      <button onClick={backButton}>Back</button>
+      <Detail pokemon={pokemon} />
+    </div>
+  );
 }
 
 export default Main;
+
+// {pokemon.name}
+// {pokemon.id}
+// {species.base_happiness}
