@@ -16,6 +16,7 @@ function Main() {
   function backButton() {
     setPokemon("");
     setDetail("")
+    setSpecies("")
     console.log(pokemon);
   }
 
@@ -28,6 +29,21 @@ function Main() {
   if (pokemon && !species) {
     loadSpecies(pokemon.id, setSpecies);
     console.log(pokemon);
+  }
+
+  if (species && !detail) {
+    let flavor = []
+     species.flavor_text_entries.forEach((text) => {
+        if (text.language.name === "en" && (text.version.name === 'red' || text.version.name === 'blue')) {
+            flavor.push(text.flavor_text)
+            console.log(text)
+        }
+        if (flavor.length > 0){
+        flavor[0] = flavor[0].replace(/\n/g, " ").replace(/\f/g, " ")
+        setDetail(flavor[0])
+        }
+    })
+    
   }
 
   console.log(species);

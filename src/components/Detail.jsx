@@ -1,5 +1,6 @@
 
 import AbilityButton from "./AbilityButton";
+import Stats from "./Stats";
 
 function Detail({ pokemon, species, callback, detail }) {
 
@@ -15,6 +16,7 @@ function Detail({ pokemon, species, callback, detail }) {
       <div className="DetailData">{detail}</div>
       <div className="Buttons">
         <AbilityButton callback={handleDetail} pokemon={pokemon} />
+        <Stats callback={handleDetail} pokemon={pokemon} />
       </div>
     </div>
   );
