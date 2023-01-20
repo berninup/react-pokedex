@@ -1,20 +1,23 @@
-import { useState } from "react"
-import Image from "./Image"
 
-function Detail({ pokemon, species }) {
+import AbilityButton from "./AbilityButton";
 
-    const [detail, setDetail] = useState("")
+function Detail({ pokemon, species, callback, detail }) {
+
+    function handleDetail(data) {
+        callback(data)
+    }
 
   return (
     <div className="Detail">
-        <div className="PokemonName">
+      <div className="PokemonName">
         <h2>{pokemon.name}</h2>
-        </div>
-        <div className="DetailData">
-
-        </div>
+      </div>
+      <div className="DetailData">{detail}</div>
+      <div className="Buttons">
+        <AbilityButton callback={handleDetail} pokemon={pokemon} />
+      </div>
     </div>
-  )
+  );
 }
 
-export default Detail
+export default Detail;
